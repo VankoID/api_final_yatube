@@ -8,4 +8,3 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
             return True
 
         return request.user == obj.author
-
