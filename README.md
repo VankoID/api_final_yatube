@@ -31,3 +31,73 @@ python3 manage.py migrate
 ```sh
 python3 manage.py runserver
 ```
+## Примеры запросов и ответов API
+
+Запрос всех постов
+```sh
+http://127.0.0.1:8000/api/v1/posts/
+```
+Ответ
+
+```sh
+[
+    {
+        "id": 1,
+        "author": "User_second",
+        "text": "Тестовый пост_1",
+        "pub_date": "2022-06-01T09:17:40.064893Z",
+        "image": null,
+        "group": null
+    },
+    {
+        "id": 2,
+        "author": "User_second",
+        "text": "Тестовый пост_2",
+        "pub_date": "2022-06-01T09:17:53.643188Z",
+        "image": null,
+        "group": null
+    }
+]
+```
+
+Запрос второго поста
+```sh
+http://127.0.0.1:8000/api/v1/posts/2/
+```
+Ответ
+
+```sh
+{
+    "id": 2,
+    "author": "User_second",
+    "text": "Тестовый пост_2",
+    "pub_date": "2022-06-01T09:17:53.643188Z",
+    "image": null,
+    "group": null
+}
+```
+Запрос первого комментария к первому посту
+```sh
+http://127.0.0.1:8000/api/v1/posts/1/comments/1
+```
+Ответ
+```sh
+{
+    "id": 1,
+    "author": "User_second",
+    "text": "Тестовый комментарий к посту",
+    "created": "2022-06-01T09:22:41.163606Z",
+    "post": 1
+}
+```
+Запрос неаутентифицированного пользователя
+```sh
+http://127.0.0.1:8000/api/v1/follow/
+```
+
+Ответ
+```sh
+{
+    "detail": "Authentication credentials were not provided."
+}
+```

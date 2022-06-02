@@ -1,8 +1,9 @@
-from posts.models import Post, Group, Comment, User, Follow
-
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
 from rest_framework.validators import UniqueTogetherValidator
+from django.shortcuts import get_object_or_404
+
+from posts.models import Post, Group, Comment, User, Follow
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -17,6 +18,15 @@ class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         read_only=True, slug_field='username'
     )
+    post = serializers.SlugRelatedField(
+        read_only=True, slug_field='id'
+    )
+
+    def validate(self, data):
+        request = self.context.get('request')
+        post_id = int(request.parser_context.get('kwargs').get('post_id'))
+        get_object_or_404(Post, pk=post_id)
+        return data
 
     class Meta:
         fields = '__all__'
