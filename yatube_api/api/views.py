@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from .permissions import IsAuthorOrReadOnly
 from .mixins import CreateListFollowModelSet
 
-from posts.models import Post, Group, Comment, User, Follow
+from posts.models import Post, Group, User
 from api.serializers import (
     PostSerializer, GroupSerializer,
     CommentSerializer, UserSerializer,
