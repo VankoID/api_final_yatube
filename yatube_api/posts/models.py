@@ -22,12 +22,6 @@ class Post(models.Model):
         ordering = ('pub_date',)
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        constraints = [
-            models.UniqueConstraint(
-                name='Unique_author',
-                fields=('user', 'author'),
-            )
-        ]
 
 
 class Comment(models.Model):
